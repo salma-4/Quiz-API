@@ -6,6 +6,7 @@ import org.app.quizapi.dto.QuizDto;
 import org.app.quizapi.dto.QuestionsDto;
 import org.app.quizapi.dto.QuizResponseDto;
 import org.app.quizapi.entity.Quiz;
+import org.app.quizapi.exception.RecordNotFoundException;
 import org.app.quizapi.mapper.QuizMapper;
 import org.app.quizapi.repository.QuizRepo;
 import org.app.quizapi.service.QuizService;
@@ -29,6 +30,8 @@ public class QuizServiceImp implements QuizService {
     @Override
     public List<QuizResponseDto> getAllQuizCategories() {
         List<Quiz> quizzes = quizRepo.findAll();
+        if(quizzes.isEmpty())
+            throw new RecordNotFoundException("No categories Added");
           return quizzes
                 .stream()
                 .map(quizMapper ::toResponseDTO)
