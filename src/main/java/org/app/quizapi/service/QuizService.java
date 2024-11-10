@@ -1,16 +1,15 @@
 package org.app.quizapi.service;
 
 import org.app.quizapi.dto.QuizDto;
-import org.app.quizapi.dto.QuizQuestionsDto;
+import org.app.quizapi.dto.QuizResponseDto;
 
 import java.util.List;
 
 public interface QuizService {
 
-    String createQuiz (QuizDto questionDto);
-    String updateQuiz(QuizDto quizDto);
+    String createQuiz (QuizDto quizDto);
+    List<QuizResponseDto> getAllQuizCategories();
     String deletQuiz(Long quizId);
-    List<QuizDto> getAllQuiz();
-    QuizQuestionsDto getQuizByType(String type);
+    QuizDto getQuizByType(String type);
 
 }

@@ -1,20 +1,15 @@
-package org.app.quizapi.entity;
+package org.app.quizapi.dto;
 
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Entity
-@Table
-@Setter
-@Getter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class Question {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class QuestionsDto {
 
     private String questionTitle;
     private String optionA;
@@ -23,5 +18,4 @@ public class Question {
     private String optionD;
     private int degree;
     private String answer;
-
 }
