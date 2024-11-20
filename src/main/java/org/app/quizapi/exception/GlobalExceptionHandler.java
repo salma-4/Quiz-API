@@ -20,4 +20,12 @@ public class GlobalExceptionHandler {
              new Date());
      return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(value = ConflictException.class)
+    public ResponseEntity<QuizAppExceptionResponse> handleConflictException(ConflictException exception){
+        QuizAppExceptionResponse response= new QuizAppExceptionResponse(
+                exception.getMessage(),
+                HttpStatus.CONFLICT.value(),
+                new Date());
+        return new ResponseEntity<>(response,HttpStatus.CONFLICT);
+    }
 }

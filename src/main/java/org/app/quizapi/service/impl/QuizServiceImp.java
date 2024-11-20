@@ -13,6 +13,7 @@ import org.app.quizapi.service.QuizService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,16 +41,18 @@ public class QuizServiceImp implements QuizService {
 
     @Override
     public String deletQuiz(Long quizId) {
-        Quiz quiz = quizRepo.getById(quizId);
+        Quiz quiz = quizRepo.findById(quizId)
+                .orElseThrow(()-> new RecordNotFoundException("Quiz not found with ID: " + quizId));
         quizRepo.delete(quiz);
         return "Quiz deleted successfully";
     }
 
 
+
     @Override
     public QuizDto getQuizByType(String type) {
        Quiz quiz= quizRepo.findQuizByType(type)
-               .orElseThrow(()-> new RuntimeException("not found exception"));
+               .orElseThrow(()-> new RecordNotFoundException("this type not exist"));
        return quizMapper.toDTO(quiz);
     }
 }
