@@ -2,13 +2,9 @@ package org.app.quizapi.service;
 
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.app.quizapi.dto.AuthResponse;
-import org.app.quizapi.dto.UserLoginDTO;
-import org.app.quizapi.dto.UserRegisterDTO;
-import org.app.quizapi.repository.UserRepo;
-import org.springframework.stereotype.Service;
+import org.app.quizapi.dto.user.AuthResponse;
+import org.app.quizapi.dto.user.UserLoginDTO;
+import org.app.quizapi.dto.user.UserRegisterDTO;
 
 
 public interface AuthService {

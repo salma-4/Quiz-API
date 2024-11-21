@@ -1,4 +1,4 @@
-package org.app.quizapi.dto;
+package org.app.quizapi.dto.question;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,13 +9,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionsDto {
-
+public class QuestionResponseDTO {
+    private Long id;
     private String questionTitle;
     private String optionA;
     private String optionB;
     private String optionC;
     private String optionD;
     private int degree;
-    private String answer;
 }

@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface QuizRepo extends JpaRepository<Quiz,Long> {
     Optional<Quiz> findQuizByType(String type);
+
 }

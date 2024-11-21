@@ -1,9 +1,10 @@
-package org.app.quizapi.dto;
+package org.app.quizapi.dto.quiz;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.app.quizapi.dto.question.QuestionsDTO;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuizDto {
+public class QuizRequestDto {
     private String type;
-    List<QuestionsDto> questions;
+    List<QuestionsDTO> questions;
 }

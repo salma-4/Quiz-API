@@ -1,4 +1,4 @@
-package org.app.quizapi.dto;
+package org.app.quizapi.dto.user;
 
 
 import lombok.*;

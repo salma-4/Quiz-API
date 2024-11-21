@@ -12,7 +12,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,8 +19,7 @@ public class Quiz {
 
     private String type;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "quizId")
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions;
 
 }

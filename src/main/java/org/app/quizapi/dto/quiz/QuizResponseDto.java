@@ -1,4 +1,4 @@
-package org.app.quizapi.dto;
+package org.app.quizapi.dto.quiz;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class QuizResponseDto {
     private Long id;
     private String category;
+
 }

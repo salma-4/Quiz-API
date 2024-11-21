@@ -1,9 +1,9 @@
 package org.app.quizapi.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.app.quizapi.dto.AuthResponse;
-import org.app.quizapi.dto.UserLoginDTO;
-import org.app.quizapi.dto.UserRegisterDTO;
+import org.app.quizapi.dto.user.AuthResponse;
+import org.app.quizapi.dto.user.UserLoginDTO;
+import org.app.quizapi.dto.user.UserRegisterDTO;
 import org.app.quizapi.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

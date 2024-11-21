@@ -4,14 +4,14 @@ package org.app.quizapi.service.impl;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.app.quizapi.dto.AuthResponse;
-import org.app.quizapi.dto.UserLoginDTO;
-import org.app.quizapi.dto.UserRegisterDTO;
+import org.app.quizapi.dto.user.AuthResponse;
+import org.app.quizapi.dto.user.UserLoginDTO;
+import org.app.quizapi.dto.user.UserRegisterDTO;
 import org.app.quizapi.entity.User;
 import org.app.quizapi.entity.UserToken;
 import org.app.quizapi.exception.ConflictException;
 import org.app.quizapi.exception.RecordNotFoundException;
-import org.app.quizapi.mapper.UserMapper;
+import org.app.quizapi.mapper.user.UserMapper;
 import org.app.quizapi.repository.UserRepo;
 import org.app.quizapi.repository.UserTokenRepo;
 import org.app.quizapi.security.JWTService;
@@ -20,9 +20,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Optional;
 
 @Service

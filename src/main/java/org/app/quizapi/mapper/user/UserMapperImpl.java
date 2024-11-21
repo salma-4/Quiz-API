@@ -1,13 +1,12 @@
-package org.app.quizapi.mapper.impl;
+package org.app.quizapi.mapper.user;
 
 
 import lombok.RequiredArgsConstructor;
-import org.app.quizapi.dto.UserRegisterDTO;
+import org.app.quizapi.dto.user.UserRegisterDTO;
 import org.app.quizapi.entity.User;
 import org.app.quizapi.entity.UserToken;
-import org.app.quizapi.mapper.UserMapper;
+import org.app.quizapi.mapper.user.UserMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
