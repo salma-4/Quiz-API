@@ -3,6 +3,7 @@ package org.app.quizapi.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.app.quizapi.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -56,6 +57,11 @@ public class JWTService {
         } catch (JwtException e) {
             throw new RuntimeException("Invalid JWT token", e);
         }
+    }
+
+    public String extractToken(HttpServletRequest request){
+        final String header = request.getHeader("Authorization");
+        return  header.substring(7);
     }
 
     private boolean isTokenExpired(Date expirationDate) {

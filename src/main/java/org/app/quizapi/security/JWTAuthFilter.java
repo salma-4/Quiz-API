@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.app.quizapi.entity.UserToken;
+import org.app.quizapi.repository.UserTokenRepo;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -24,6 +27,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
     private  final JWTService jwtService;
     private  final UserDetailsService userDetailsService;
+    private final UserTokenRepo userTokenRepo;
     @Override
     protected void doFilterInternal(
              @NonNull HttpServletRequest request,
@@ -34,15 +38,19 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     final String header = request.getHeader("Authorization");
     if (header== null || ! header.startsWith("Bearer")){
         filterChain.doFilter(request,response);
-        log.error("403 NO token sent ");
-        return;
+         return;
     }
 
     final String jwt = header.substring(7);
     //2-got to userDetailsService to check if the user exist in db or not
     String username = jwtService.extractUserName(jwt);
     if(username !=null && SecurityContextHolder.getContext().getAuthentication() ==null){
-        // extract user data
+        Optional<UserToken> userTokenOptional = userTokenRepo.findByToken(jwt);
+        if (userTokenOptional.isEmpty()) {
+            log.warn("Token not found in database for user '{}'", username);
+            filterChain.doFilter(request, response);
+            return;
+        }
         UserDetails user = userDetailsService.loadUserByUsername(username);
         //validate token
         if(jwtService.isTokenValid(jwt,user) ){

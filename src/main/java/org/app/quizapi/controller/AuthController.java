@@ -2,6 +2,7 @@ package org.app.quizapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.app.quizapi.dto.AuthResponse;
+import org.app.quizapi.dto.UserLoginDTO;
 import org.app.quizapi.dto.UserRegisterDTO;
 import org.app.quizapi.service.AuthService;
 import org.springframework.http.HttpStatus;
@@ -21,5 +22,10 @@ public class AuthController {
     public ResponseEntity<AuthResponse> register(@RequestBody UserRegisterDTO newUser){
         AuthResponse response = authService.register(newUser);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody UserLoginDTO userRequest){
+        AuthResponse response= authService.login(userRequest);
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }
