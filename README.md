@@ -24,12 +24,15 @@ The API supports user authentication, quiz categorization, and various administr
 
 Handles user registration, login, and other authentication-related actions.
 
-| No. | Feature  | Body                        | Header | Description                 | Endpoint                        |
-|----:|----------|-----------------------------|--------|-----------------------------|---------------------------------|
-|  1. | Login    | username(unique) , password |        | generate new token for user | `POST quizApp/v1/auth/login `   |
-|  2. | Register | Data of user                |        | Add new user create token   | `POST quizApp/v1/auth/newUser ` |
-|  3. | Logout   |                             | Token  | Logging out                 | `POST quizApp/v1/auth/logout `  |
-|  4. |          |
+| No. | Feature             | Body                        | Header      | Description                            | Endpoint                                 |
+|----:|---------------------|-----------------------------|-------------|----------------------------------------|------------------------------------------|
+|  1. | Login               | username(unique) , password |             | generate new token for user            | `POST quizApp/v1/auth/login `            |
+|  2. | Register            | Data of user                |             | Add new user create token              | `POST quizApp/v1/auth/newUser `          |
+|  3. | Logout              |                             | Token       | Logging out                            | `POST quizApp/v1/auth/logout `           |
+|  4. | Forget password     |                             | param/email | Send OTP to email                      | `POST /quizApp/v1/auth/user?email=`      |
+|  5. | Reset password      | OTP ,new password           |             | Check OTP validity and update password | `POST quizApp/v1/auth/user/newPassword ` |
+|  6. | Regenerate  password |                             | param/email | regenerate OTP and send it             | `POST quizApp/v1/auth/user/otp?email= `  |
+
 
 ### **2.Quiz Management**
 Operations related to quizzes.
