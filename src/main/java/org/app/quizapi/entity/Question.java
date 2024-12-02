@@ -23,7 +23,7 @@ public class Question {
     private int degree;
     private String answer;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.PERSIST)
     @JoinColumn(name = "quiz_id", nullable = false)
     private Quiz quiz;
 }

@@ -36,10 +36,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponse register(UserRegisterDTO user) {
         User newUser = userMapper.toRegisterEntity(user);
-        if (userRepo.getUserByUsername(user.getUsername()).isPresent()) {
+        if (userRepo.getByUsername(user.getUsername()).isPresent()) {
             throw new ConflictException("Username already exists");
         }
-        if (userRepo.getUserByEmail(user.getEmail()).isPresent()) {
+        if (userRepo.getByEmail(user.getEmail()).isPresent()) {
             throw new ConflictException("Email already exists");
         }
         userRepo.save(newUser);
@@ -56,7 +56,7 @@ public class AuthServiceImpl implements AuthService {
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
         );
 
-        User existingUser = userRepo.getUserByUsername(user.getUsername())
+        User existingUser = userRepo.getByUsername(user.getUsername())
                 .orElseThrow(() -> new RecordNotFoundException("No user with username " + user.getUsername()));
 
         String newToken = jwtService.generateToken(existingUser);
