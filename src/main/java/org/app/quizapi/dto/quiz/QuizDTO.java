@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.app.quizapi.dto.question.QuestionResponseDTO;
-import org.app.quizapi.dto.question.QuestionsDTO;
 
 import java.util.List;
 @Data

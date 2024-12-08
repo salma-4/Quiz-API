@@ -1,6 +1,5 @@
 package org.app.quizapi.controller;
 
-
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.app.quizapi.service.AuthService;
