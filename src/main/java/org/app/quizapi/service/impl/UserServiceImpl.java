@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String forgetPassword(String email) {
         User user = userRepo.getByEmail(email)
-                .orElseThrow(()->new RecordNotFoundException(email +"not exist "));
+                .orElseThrow(()->new RecordNotFoundException(email +" not exist"));
        OTPResponseDTO otp = otpService.generateOTP(user);
         emailService.sendOtpEmail(email,otp.getOtp());
         return "Check your mail for verification code";

@@ -1,4 +1,4 @@
-package org.app.quizapi.service;
+package org.app.quizapi.service.impl;
 
 import org.app.quizapi.dto.question.QuestionsDTO;
 import org.app.quizapi.dto.quiz.QuizDTO;
@@ -11,7 +11,6 @@ import org.app.quizapi.mapper.question.QuestionMapper;
 import org.app.quizapi.mapper.quiz.QuizMapper;
 import org.app.quizapi.repository.QuestionRepo;
 import org.app.quizapi.repository.QuizRepo;
-import org.app.quizapi.service.impl.QuizServiceImp;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -45,6 +44,7 @@ class QuizServiceTest {
 
     private QuizRequestDto quizRequestDto;
     private List<QuestionsDTO> questionList;
+
     @BeforeEach
     void setUp() {
         questionList = new ArrayList<>();
@@ -73,6 +73,7 @@ class QuizServiceTest {
                 .questions(questionList)
                 .build();
     }
+
     @Test
     void createQuiz_notExistingCategory_returnsNewQuizCreatedMessage() {
         // Arrange
@@ -101,6 +102,7 @@ class QuizServiceTest {
         Mockito.verify(quizRepo).save(mockQuiz);
         assertThat(resultMessage).isEqualTo("New quiz created successfully");
     }
+
     @Test
     void createQuiz_existingCategory_returnsUpdatedQuizMessage() {
         // Arrange
@@ -120,17 +122,18 @@ class QuizServiceTest {
         assertThat(msg).isEqualTo("Quiz updated with new questions successfully");
 
     }
+
     @Test
     void getAllQuizCategoriesTest_existingQuizzes_returnAll() {
         //Arrange
 
-        List<Quiz> quizzes = List.of(new Quiz(),new Quiz());
+        List<Quiz> quizzes = List.of(new Quiz(), new Quiz());
         Mockito.when(quizRepo.findAll()).thenReturn(quizzes);
         QuizResponseDto mockQuizResponse = new QuizResponseDto();
         Mockito.when(quizMapper.toResponseDTO(Mockito.any())).thenReturn(mockQuizResponse);
 
         //Act
-        List<QuizResponseDto> quizResponseDtos= quizService.getAllQuizCategories();
+        List<QuizResponseDto> quizResponseDtos = quizService.getAllQuizCategories();
 
         //Assert
         Mockito.verify(quizRepo).findAll(); // Verify that findAll() was called
@@ -138,22 +141,24 @@ class QuizServiceTest {
         assertThat(quizResponseDtos.getFirst()).isEqualTo(mockQuizResponse);
 
     }
+
     @Test
     void deleteQuizTest_existingQuiz_returnSuccessMessage() {
-       //Arrange
+        //Arrange
         Long quizId = 1L;
         Quiz quiz = new Quiz();
         Mockito.when(quizRepo.findById(quizId)).thenReturn(Optional.of(quiz));
 
         //Act
-       String msg = quizService.deletQuiz(quizId);
+        String msg = quizService.deletQuiz(quizId);
 
-       //Assert
+        //Assert
         assertThat(msg).isEqualTo("Quiz deleted successfully");
         Mockito.verify(quizRepo).delete(quiz);
     }
+
     @Test
-    void deleteQuizTest_notExistingQuiz_throwException(){
+    void deleteQuizTest_notExistingQuiz_throwException() {
         //Arrange
         Mockito.when(quizRepo.findById(1L)).thenReturn(Optional.empty());
 
@@ -162,10 +167,11 @@ class QuizServiceTest {
                 .isInstanceOf(RecordNotFoundException.class)
                 .hasMessageContaining("Quiz not found with ID: 1");
     }
+
     @Test
     void getQuizByTypeTest_existingType_returnQuizRequestDTO() {
         //Arrange
-        String category ="Science";
+        String category = "Science";
         Quiz existingQuiz = new Quiz();
         Mockito.when(quizRepo.findQuizByType(category)).thenReturn(Optional.of(existingQuiz));
         QuizRequestDto quizRequest = new QuizRequestDto();
@@ -178,18 +184,20 @@ class QuizServiceTest {
         assertThat(result).isNotNull();
         Mockito.verify(quizRepo).findQuizByType(category);
     }
+
     @Test
-    void getQuizByTypeTest_notExistingType_throwException(){
+    void getQuizByTypeTest_notExistingType_throwException() {
         //Arrange
         String category = "Science";
         Mockito.when(quizRepo.findQuizByType(category)).thenReturn(Optional.empty());
 
         //Act & Assert
-        assertThatThrownBy(()->quizService.getQuizByType(category))
+        assertThatThrownBy(() -> quizService.getQuizByType(category))
                 .isInstanceOf(RecordNotFoundException.class)
                 .hasMessageContaining("this type not exist");
 
     }
+
     @Test
     void getQuizByIdTest_existingQuiz_returnQuizDTO() {
         //Arrange
@@ -208,14 +216,15 @@ class QuizServiceTest {
         Mockito.verify(quizRepo).findById(quizId);
 
     }
+
     @Test
-    void getQuizByIdTest_notExistingQuiz_throwException(){
+    void getQuizByIdTest_notExistingQuiz_throwException() {
         //Arrange
-        Long quizId= 1L;
+        Long quizId = 1L;
         Mockito.when(quizRepo.findById(quizId)).thenReturn(Optional.empty());
 
         //Act &Assert
-        assertThatThrownBy(()->quizService.getQuizById(quizId))
+        assertThatThrownBy(() -> quizService.getQuizById(quizId))
                 .isInstanceOf(RecordNotFoundException.class)
                 .hasMessageContaining("No quiz with id 1");
     }
